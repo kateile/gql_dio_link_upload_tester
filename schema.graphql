@@ -1,0 +1,16 @@
+type Company {
+    id: ID
+    name: String @fake(type:companyName)
+}
+
+
+type Query {
+    companies: [Company!]
+}
+
+type Mutation {
+    uploadImage(input: Upload!): String!
+}
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
