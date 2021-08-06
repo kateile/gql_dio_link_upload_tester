@@ -1,0 +1,19 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+      - schema.graphql
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - output: lib/gql/gen/graphql_api.dart
+              schema: schema.graphql
+              queries_glob: lib/gql/**.graphql
+          scalar_mapping:
+            - graphql_type: Upload
+              custom_parser_import: 'package:dio_upload/gql/upload_serializer.dart'
+              dart_type:
+                name: MultipartFile
+                imports:
+                  - 'package:dio/dio.dart'

@@ -8,6 +8,11 @@
 const MY_IP = "127.0.0.1"; //replace with your ip here
 ```
 
+- create lib/my_ip.dart and put 
+```
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
 then run
 ```
 graphql-faker -o schema.graphql

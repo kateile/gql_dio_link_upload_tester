@@ -3,30 +3,13 @@ import 'dart:io';
 import "package:dio/dio.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import "package:gql/language.dart" as gql;
 import "package:gql_dio_link/gql_dio_link.dart";
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'gql/gen/graphql_api.graphql.dart';
 import 'my_ip.dart';
-
-/// This for showing success operation
-const query = """
-{
-  companies {
-    id
-    name
-  }
-}
-""";
-
-/// This is for uploading image
-const mutation = """
-mutation uploadImage(\$input:Upload!){
-  uploadImage(input:\$input)
-}
-""";
 
 void main() {
   runApp(MyApp());
@@ -81,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /// This should run successfully
     final queryResult = await client.query(
-      QueryOptions(document: gql.parseString(query)),
+      QueryOptions(document: COMPANIES_QUERY_DOCUMENT),
     );
 
     print('queryResult result: $queryResult');
@@ -92,17 +75,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final file = await getImageFileFromAssets();
 
+    final input = await MultipartFile.fromFile(
+      file.path,
+      filename: "image.png",
+      contentType: MediaType("image", "png"),
+    );
+
     /// But this will cause error due to encoding
     final mutationResult = await client.mutate(
       MutationOptions(
-        document: gql.parseString(mutation),
-        variables: {
-          "input": await MultipartFile.fromFile(
-            file.path,
-            filename: "image.png",
-            contentType: MediaType("image", "png"),
-          )
-        },
+        document: UPLOAD_IMAGE_MUTATION_DOCUMENT,
+        variables: UploadImageArguments(input: input).toJson(),
       ),
     );
 

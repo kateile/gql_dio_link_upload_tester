@@ -32,10 +32,15 @@ dependencies:
   dio: ^4.0.0
   graphql_flutter: ^5.0.0
   gql_dio_link: ^0.2.1-alpha+1628192550872
+  equatable: ^2.0.0
+  json_annotation: ^4.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  artemis: ^7.1.1-beta.1
+  build_runner: ^2.0.4
+  json_serializable: ^4.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
