@@ -86,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       MutationOptions(
         document: UPLOAD_IMAGE_MUTATION_DOCUMENT,
         variables: UploadImageArguments(input: input).toJson(),
+        fetchPolicy: FetchPolicy.noCache,
       ),
     );
 
