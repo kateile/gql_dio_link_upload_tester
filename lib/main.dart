@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       MutationOptions(
         document: gql.parseString(mutation),
         variables: {
-          "input": MultipartFile.fromFile(
+          "input": await MultipartFile.fromFile(
             file.path,
             filename: "image.png",
             contentType: MediaType("image", "png"),
