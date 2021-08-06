@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       link: link,
     );
 
+    /// This should run successfully
     final queryResult = await client.query(
       QueryOptions(document: gql.parseString(query)),
     );
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final file = await getImageFileFromAssets();
 
+    /// But this will cause error due to encoding
     final mutationResult = await client.mutate(
       MutationOptions(
         document: gql.parseString(mutation),
