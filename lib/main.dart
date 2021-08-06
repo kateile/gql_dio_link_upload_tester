@@ -63,7 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
       _queryResult = "loading..........";
     });
 
-    final dio = Dio();
+    final dio = Dio(
+      BaseOptions(
+        connectTimeout: 5000,
+      ),
+    );
 
     final Link link = DioLink(
       "http://$MY_IP:9002/graphql",
